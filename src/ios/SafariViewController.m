@@ -145,7 +145,10 @@
  */
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
   if (self.callbackId != nil) {
-    CDVPluginResult * pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:@{@"event":@"loaded", "success":didLoadSuccessfully}];
+    CDVPluginResult * pluginResult = [CDVPluginResult
+      resultWithStatus:CDVCommandStatus_OK messageAsDictionary:@{
+        @"event":@"loaded",
+        @"success":[NSNumber numberWithBool:didLoadSuccessfully]}];
     [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
   }
